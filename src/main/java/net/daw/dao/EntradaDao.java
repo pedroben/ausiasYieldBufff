@@ -97,7 +97,7 @@ public class EntradaDao {
             String strFecha = oMysql.getOne("entrada", "fecha", oEntradaBean.getId());
             
             if (strFecha != null) {
-                Date dFecha = new SimpleDateFormat("yyyy-MM-dd").parse(strFecha);
+                Date dFecha = new SimpleDateFormat("dd-MM-yyyy").parse(strFecha);
                 oEntradaBean.setFecha(dFecha);
             } else {
                 oEntradaBean.setFecha(new Date(0));
@@ -132,7 +132,7 @@ public class EntradaDao {
             oMysql.updateOne(oEntradaBean.getId(), "entrada", "contenido", oEntradaBean.getContenido());
             oMysql.updateOne(oEntradaBean.getId(), "entrada", "id_hilo", Integer.toString(oEntradaBean.getHilo().getId()));
             oMysql.updateOne(oEntradaBean.getId(), "entrada", "id_usuario", Integer.toString(oEntradaBean.getUsuario().getId()));
-            java.text.SimpleDateFormat oSimpleDateFormat = new java.text.SimpleDateFormat("yyyy-MM-dd");
+            java.text.SimpleDateFormat oSimpleDateFormat = new java.text.SimpleDateFormat("dd-MM-yyyy");
             oMysql.updateOne(oEntradaBean.getId(), "entrada", "fecha", oSimpleDateFormat.format(oEntradaBean.getFecha()));
             oMysql.commitTrans();
         } catch (Exception e) {
