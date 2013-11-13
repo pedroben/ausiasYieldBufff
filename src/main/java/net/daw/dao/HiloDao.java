@@ -100,7 +100,7 @@ public class HiloDao {
 
                 }
             } catch (Exception e) {
-                throw new Exception("HiloDao.getCliente: Error: " + e.getMessage());
+                throw new Exception("HiloDao.getHilo: Error: " + e.getMessage());
             } finally {
                 oMysql.desconexion();
             }
@@ -124,7 +124,7 @@ public class HiloDao {
             oMysql.commitTrans();
         } catch (Exception e) {
             oMysql.rollbackTrans();
-            throw new Exception("HiloDao.setCliente: Error: " + e.getMessage());
+            throw new Exception("HiloDao.setHilo: Error: " + e.getMessage());
         } finally {
             oMysql.desconexion();
         }
@@ -136,7 +136,7 @@ public class HiloDao {
             oMysql.removeOne(oHiloBean.getId(), "hilo");
             oMysql.desconexion();
         } catch (Exception e) {
-            throw new Exception("HiloDao.removeCliente: Error: " + e.getMessage());
+            throw new Exception("HiloDao.removeHilo: Error: " + e.getMessage());
         } finally {
             oMysql.desconexion();
         }

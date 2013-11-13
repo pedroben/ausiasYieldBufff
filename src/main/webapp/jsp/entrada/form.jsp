@@ -23,9 +23,11 @@
     }
     id_usuario = Integer.toString(oEntradaBean.getUsuario().getId());
     if (oEntradaBean.getUsuario().getId() > 0) {
-        descUsuario = oEntradaBean.getUsuario().getNombre();
+        descUsuario = oEntradaBean.getUsuario().getLogin();
     }
-    fecha = new SimpleDateFormat("dd-MM-yyyy").format(oEntradaBean.getFecha());
+    titulo= oEntradaBean.getTitulo();
+    contenido = oEntradaBean.getContenido();
+    fecha = new SimpleDateFormat("yyyy-MM-dd").format(oEntradaBean.getFecha());
 
     if (oContexto.getMetodo().equals("view")) {
         strTitulo = "Vista";
@@ -42,14 +44,14 @@
     }
 %>
 <h1><%=strTitulo%> de Entrada</h1>
-<form class="form-horizontal" action="Controller" method="post" id="clienteForm">
+<form class="form-horizontal" action="Controller" method="post" id="entradaForm">
     <legend>Formulario de Entrada</legend>
     <input type="hidden" name="id" value="<%=id%>" /> 
-    <input type="hidden" name="class" value="compra" /> 
+    <input type="hidden" name="class" value="entrada" /> 
     <input type="hidden" name="method" value="<%=oContexto.getMetodo()%>" /> 
     <input type="hidden" name="phase" value="2" />
     <div class="control-group">
-        <label class="control-label" for="id_hilo">Hilo: </label> 
+        <label class="control-label" for="id_hilo">Id Hilo: </label> 
         <div class="controls">                
             <input readonly="true" id="id_producto" class="input-mini"
                    name="id_hilo" type="text" size="5" maxlength="5"
@@ -60,7 +62,7 @@
     </div>             
 
     <div class="control-group">
-        <label class="control-label" for="id_usuario">Usuario: </label> 
+        <label class="control-label" for="id_usuario">Id Usuario: </label> 
         <div class="controls">                
             <input readonly="true" id="id_cliente" class="input-mini"
                    name="id_usuario" type="text" size="5" maxlength="5"

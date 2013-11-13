@@ -27,8 +27,6 @@ public class UsuarioDao {
             } else {
                 oUsuario.setId(Integer.parseInt(strId));
                 oUsuario.setPassword(oMysql.getOne("usuario", "password", oUsuario.getId()));
-                oUsuario.setNombre(oMysql.getOne("usuario", "nombre", oUsuario.getId()));
-                oUsuario.setEmail(oMysql.getOne("usuario", "email", oUsuario.getId()));
             }
             oMysql.desconexion();
             return oUsuario;
@@ -97,14 +95,12 @@ public class UsuarioDao {
                 if (!oMysql.existsOne("hilo", oUsuarioBean.getId())) {
                     oUsuarioBean.setId(0);
                 } else {
-                    oUsuarioBean.setLogin(oMysql.getOne("hilo", "login", oUsuarioBean.getId()));
-                    oUsuarioBean.setPassword(oMysql.getOne("hilo", "password", oUsuarioBean.getId()));
-                    oUsuarioBean.setNombre(oMysql.getOne("hilo", "nombre", oUsuarioBean.getId()));
-                    oUsuarioBean.setEmail(oMysql.getOne("hilo", "email", oUsuarioBean.getId()));
+                    oUsuarioBean.setLogin(oMysql.getOne("usuario", "login", oUsuarioBean.getId()));
+                    oUsuarioBean.setPassword(oMysql.getOne("usuario", "password", oUsuarioBean.getId()));
 
                 }
             } catch (Exception e) {
-                throw new Exception("HiloDao.getCliente: Error: " + e.getMessage());
+                throw new Exception("UsuarioDao.getUsuario: Error: " + e.getMessage());
             } finally {
                 oMysql.desconexion();
             }
@@ -123,8 +119,6 @@ public class UsuarioDao {
             }
             oMysql.updateOne(oUsuarioBean.getId(), "usuario", "login", oUsuarioBean.getLogin());
             oMysql.updateOne(oUsuarioBean.getId(), "usuario", "password", oUsuarioBean.getPassword());
-            oMysql.updateOne(oUsuarioBean.getId(), "usuario", "nombre", oUsuarioBean.getNombre());
-            oMysql.updateOne(oUsuarioBean.getId(), "usuario", "email", oUsuarioBean.getEmail());
 
             oMysql.commitTrans();
         } catch (Exception e) {

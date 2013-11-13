@@ -35,13 +35,13 @@
                 while (iterator.hasNext()) {
                     FilterBean oFilterBean = (FilterBean) iterator.next();
                     out.print("(" + oFilterBean.getFilter() + " " + oFilterBean.getFilterOperator() + " " + oFilterBean.getFilterValue() + ") ");
-                    if (oFilterBean.getFilter().equals("id_cliente") && oFilterBean.getFilterOperator().equals("equals")) {
+                    if (oFilterBean.getFilter().equals("hilo") && oFilterBean.getFilterOperator().equals("equals")) {
                         bAddProductToClient = Integer.parseInt(oFilterBean.getFilterValue());
                     }
                 }
                 out.print("<a href=\"Controller?" + oContexto.getSerializedParamsExceptFilter() + "\">(Quitar filtro)</a></p>");
                 if (bAddProductToClient > 0) {
-                    out.print("<a class=\"btn\" type=\"button\" href=\"Controller?searchingfor=cliente&class=compra&method=new&id_cliente=" + bAddProductToClient + "\">Añadir producto al cliente " + bAddProductToClient + "</a>");
+                    out.print("<a class=\"btn\" type=\"button\" href=\"Controller?searchingfor=hilo&class=entrada&method=new&id_hilo=" + bAddProductToClient + "\">Añadir hilo a la entrada " + bAddProductToClient + "</a>");
                 }
             } else {
                 out.print("<p>Sin filtrar</p>");
@@ -176,7 +176,7 @@
         <td><%=oEntradaBEAN.getTitulo()%></td>
         <td><%=oEntradaBEAN.getContenido()%></td>
         <%
-            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/YYYY");
+            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd-MM-YYYY");
         %>
         <td><%=formatoFecha.format(oEntradaBEAN.getFecha())%></td>
         <td>
