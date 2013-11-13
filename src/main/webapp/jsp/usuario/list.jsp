@@ -4,7 +4,6 @@
 <%@page import="net.daw.helper.FilterBean"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.Iterator"%>
-<%@ page import="net.daw.bean.UsuarioBean"%>
 <%@ page import="net.daw.helper.Contexto"%>
 <%
     Contexto oContexto = (Contexto) request.getAttribute("contexto");
@@ -161,7 +160,7 @@
                 <div class="btn-group">
                     <%
                         if (oContexto.getSearchingFor().equals("usuario")) {
-                            out.print("<a class=\"btn btn-mini\" href=\"Controller?" + oContexto.getSerializedParamsExcept(new ArrayList<String>(Arrays.asList("class", "method", "phase", "id_usuario", "id", "returnclass", "returnmethod", "returnphase", "searchingfor"))) + "class=" + oContexto.getClaseRetorno() + "&method=" + oContexto.getMetodoRetorno() + "&phase=" + oContexto.getFaseRetorno() + "&usuario=" + oUsuarioBean.getId() + "&id=" + oContexto.getId() + "\"><i class=\"icon-ok\"></i></a>");
+                            out.print("<a class=\"btn btn-mini\" href=\"Controller?" + oContexto.getSerializedParamsExcept(new ArrayList<String>(Arrays.asList("class", "method", "phase", "id_usuario", "id", "returnclass", "returnmethod", "returnphase", "searchingfor"))) + "class=" + oContexto.getClaseRetorno() + "&method=" + oContexto.getMetodoRetorno() + "&phase=" + oContexto.getFaseRetorno() + "&id_usuario=" + oUsuarioBean.getId() + "&id=" + oContexto.getId() + "\"><i class=\"icon-ok\"></i></a>");
                         } else {
                             out.print("<a class=\"btn btn-mini\" href=\"Controller?class=usuario&method=view&id=" + oUsuarioBean.getId() + "\"><i class=\"icon-eye-open\"></i></a>");
                             out.print("<a class=\"btn btn-mini\" href=\"Controller?class=usuario&method=update&id=" + oUsuarioBean.getId() + "\"><i class=\"icon-pencil\"></i></a>");
