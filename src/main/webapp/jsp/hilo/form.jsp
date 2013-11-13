@@ -1,40 +1,29 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="net.daw.helper.Contexto"%>
-<%@page import="net.daw.bean.CompraBean"%>
+<%@page import="net.daw.bean.HiloBean"%>
 <% Contexto oContexto = (Contexto) request.getAttribute("contexto");
     String strTitulo = "";
     String strControlEnabled = "";
     String strValueBoton = "Enviar";
 
     Integer id = 0;
-    String id_cliente = "";
-    String descCliente = "";
-    String id_producto = "";
-    String descProducto = "";
-    String cantidad = "0";
+    String nombre = "";
     String fecha = "";
 
-    CompraBean oCompraBean = (CompraBean) oContexto.getParametro();
-    id = oCompraBean.getId();
-    id_cliente = Integer.toString(oCompraBean.getCliente().getId());
-    if (!(oCompraBean.getCliente().getNombre().equals("") && oCompraBean.getCliente().getApe1().equals(""))) {
-        descCliente = oCompraBean.getCliente().getNombre() + " " + oCompraBean.getCliente().getApe1();
-    }
-    id_producto = Integer.toString(oCompraBean.getProducto().getId());
-    if (oCompraBean.getProducto().getId() > 0) {
-        descProducto = oCompraBean.getProducto().getDescripcion();
-    }
-    cantidad = oCompraBean.getCantidad().toString();
-    fecha = new SimpleDateFormat("yyyy-MM-dd").format(oCompraBean.getFecha());
+    HiloBean oHiloBean = (HiloBean) oContexto.getParametro();
+    id = oHiloBean.getId();
+    nombre = oHiloBean.getNombre();
 
     if (oContexto.getMetodo().equals("view")) {
         strTitulo = "Vista";
         strControlEnabled = "disabled=\"true\"";
         strValueBoton = "Cerrar";
+        fecha = new SimpleDateFormat("yyyy-MM-dd").format(oHiloBean.getFecha());
     }
     if (oContexto.getMetodo().equals("update")) {
         strTitulo = "Edición";
         strValueBoton = "Modificar";
+        fecha = new SimpleDateFormat("yyyy-MM-dd").format(oHiloBean.getFecha());
     }
     if (oContexto.getMetodo().equals("new")) {
         strTitulo = "Alta";
@@ -42,41 +31,29 @@
     }
 %>
 <h1><%=strTitulo%> de compra</h1>
-<form class="form-horizontal" action="Controller" method="post" id="clienteForm">
-    <legend>Formulario de compra</legend>
+<form class="form-horizontal" action="Controller" method="post" id="hiloForm">
+    <legend>Formulario de hilo</legend>
     <input type="hidden" name="id" value="<%=id%>" /> 
-    <input type="hidden" name="class" value="compra" /> 
+    <input type="hidden" name="class" value="hilo" /> 
     <input type="hidden" name="method" value="<%=oContexto.getMetodo()%>" /> 
     <input type="hidden" name="phase" value="2" />
     <div class="control-group">
-        <label class="control-label" for="id_producto">Producto: </label> 
+        <label class="control-label" for="id">Id: </label> 
         <div class="controls">                
             <input readonly="true" id="id_producto" class="input-mini"
                    name="id_producto" type="text" size="5" maxlength="5"
-                   value="<%=id_producto%>" />  
-            <input <%=strControlEnabled%> type="submit" name="searchingfor" value="producto" />
-            <span class="alert alert-success"><%=descProducto%></span>
+                   value="<%=id%>" />  
         </div>
     </div>             
 
     <div class="control-group">
-        <label class="control-label" for="id_cliente">Cliente: </label> 
+        <label class="control-label" for="nombre">Nombre: </label> 
         <div class="controls">                
-            <input readonly="true" id="id_cliente" class="input-mini"
-                   name="id_cliente" type="text" size="5" maxlength="5"
-                   value="<%=id_cliente%>" />  
-            <input <%=strControlEnabled%> type="submit" name="searchingfor" value="cliente" />
-            <span class="alert alert-success"><%=descCliente%></span>
+            <input <%=strControlEnabled%> id="nombre" 
+                                          name="nombre" type="text" size="50" maxlength="50"
+                                          value="<%=nombre%>" />  
         </div>
     </div>             
-    <div class="control-group">
-        <label class="control-label" for="precio">Cantidad: </label> 
-        <div class="controls">
-            <input <%=strControlEnabled%>  id="cantidad"
-                                           name="cantidad" type="text" size="30" maxlength="50"
-                                           value="<%=cantidad%>"  /> 
-        </div>
-    </div>
     <div class="control-group">
         <label class="control-label" for="fecha">Fecha: </label> 
         <div class="controls">

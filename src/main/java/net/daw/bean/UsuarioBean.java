@@ -12,7 +12,7 @@ public class UsuarioBean {
 
     }
     
-    public UsuarioBean(int id){
+    public UsuarioBean(Integer id){
         this.id = id;
     }
 

@@ -92,7 +92,7 @@ public class UsuarioDao {
         if (oUsuarioBean.getId() > 0) {
             try {
                 oMysql.conexion(enumTipoConexion);
-                if (!oMysql.existsOne("hilo", oUsuarioBean.getId())) {
+                if (!oMysql.existsOne("usuario", oUsuarioBean.getId())) {
                     oUsuarioBean.setId(0);
                 } else {
                     oUsuarioBean.setLogin(oMysql.getOne("usuario", "login", oUsuarioBean.getId()));

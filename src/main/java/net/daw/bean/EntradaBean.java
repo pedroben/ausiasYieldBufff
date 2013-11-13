@@ -119,4 +119,8 @@ public class EntradaBean {
         this.fecha = fecha;
     }
 
+    public void setCantidad(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

@@ -92,7 +92,7 @@ public class HiloDao {
                     String strFecha = oMysql.getOne("hilo", "fecha", oHiloBean.getId());
 
                     if (strFecha != null) {
-                        Date dFecha = new SimpleDateFormat("dd-MM-yyyy").parse(strFecha);
+                        Date dFecha = new SimpleDateFormat("yyyy-MM-dd").parse(strFecha);
                         oHiloBean.setFecha(dFecha);
                     } else {
                         oHiloBean.setFecha(new Date(0));
@@ -118,7 +118,7 @@ public class HiloDao {
                 oHiloBean.setId(oMysql.insertOne("hilo"));
             }
             oMysql.updateOne(oHiloBean.getId(), "hilo", "nombre", oHiloBean.getNombre());
-            java.text.SimpleDateFormat oSimpleDateFormat = new java.text.SimpleDateFormat("dd-MM-yyyy");
+            java.text.SimpleDateFormat oSimpleDateFormat = new java.text.SimpleDateFormat("yyyy-MM-dd");
             oMysql.updateOne(oHiloBean.getId(), "hilo", "fecha", oSimpleDateFormat.format(oHiloBean.getFecha()));
 
             oMysql.commitTrans();

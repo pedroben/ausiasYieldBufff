@@ -22,14 +22,14 @@ public class EntradaNew1 implements Operation {
     @Override
     public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         Contexto oContexto = (Contexto) request.getAttribute("contexto");
-        EntradaParam oCompraParam = new EntradaParam(request);
+        EntradaParam oEntradaParam = new EntradaParam(request);
         EntradaBean oEntradaBean = new EntradaBean();
         HiloDao oHiloDao = new HiloDao(oContexto.getEnumTipoConexion());
         UsuarioDao oUsuarioDao = new UsuarioDao(oContexto.getEnumTipoConexion());
         try {
-            oEntradaBean = oCompraParam.load(oEntradaBean);
+            oEntradaBean = oEntradaParam.load(oEntradaBean);
             oEntradaBean.setHilo(oHiloDao.get(oEntradaBean.getHilo()));
-            oEntradaBean = oCompraParam.load(oEntradaBean);
+            oEntradaBean = oEntradaParam.load(oEntradaBean);
             oEntradaBean.setUsuario(oUsuarioDao.get(oEntradaBean.getUsuario()));
         } catch (NumberFormatException e) {
             oContexto.setVista("jsp/mensaje.jsp");

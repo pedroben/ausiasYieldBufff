@@ -66,7 +66,7 @@ public class EntradaNew2 implements Operation {
                     throw new ServletException("EntradaController: Update Error: Phase 2: " + e.getMessage());
                 }
                 String strMensaje = "Se ha añadido la información de entrada con id=" + Integer.toString(oEntradaBean.getId()) + "<br />";
-                strMensaje += "<a href=\"Controller?class=entrada&method=list&filter=id_usuario&filteroperator=equals&filtervalue=" + oEntradaBean.getUsuario().getId() + "\">Ver compras de este cliente</a><br />";
+                strMensaje += "<a href=\"Controller?class=entrada&method=list&filter=id_usuario&filteroperator=equals&filtervalue=" + oEntradaBean.getUsuario().getId() + "\">Ver entradas de este usuario</a><br />";
                 strMensaje += "<a href=\"Controller?class=entrada&method=view&id=" + oEntradaBean.getId() + "\">Ver entrada creada en el formulario</a><br />";
                 return strMensaje;
         }

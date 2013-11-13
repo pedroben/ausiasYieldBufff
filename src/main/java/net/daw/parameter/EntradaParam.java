@@ -41,10 +41,10 @@ public class EntradaParam {
         try {
             
             if ((request.getParameter("titulo") != null)) {
-                oEntrada.setTitulo(request.getParameter("cantidad"));
+                oEntrada.setTitulo(request.getParameter("titulo"));
             }
             if ((request.getParameter("contenido") != null)) {
-                oEntrada.setContenido(request.getParameter("cantidad"));
+                oEntrada.setContenido(request.getParameter("contenido"));
             }
             if ((request.getParameter("id_hilo") != null)) {
                 oEntrada.getHilo().setId(Integer.parseInt(request.getParameter("id_hilo")));
