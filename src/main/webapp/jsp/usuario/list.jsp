@@ -138,7 +138,8 @@
             <a href="Controller?<%=oContexto.getSerializedParamsExceptOrder()%>&order=password&ordervalue=asc"><i class="icon-arrow-up"></i></a>
             <a href="Controller?<%=oContexto.getSerializedParamsExceptOrder()%>&order=password&ordervalue=desc"><i class="icon-arrow-down"></i></a>        
         </th>
-        <th colspan="2">Operaciones</th>
+        <th>Relaciones</th>
+        <th>Operaciones</th>
     </tr>
     <%
         while (oIterador.hasNext()) {
@@ -148,7 +149,13 @@
         <td><%=oUsuarioBean.getId()%></td>
         <td><%=oUsuarioBean.getLogin()%></td>
         <td><%=oUsuarioBean.getPassword()%></td>
-       
+        <td>
+            <div class="btn-toolbar">
+                <div class="btn-group">                    
+                    <a class="btn btn-mini" href="Controller?class=entrada&method=list&filter=id_usuario&filteroperator=equals&filtervalue=<%=oUsuarioBean.getId()%>">Entradas</a>
+                </div>
+            </div>
+        </td>
         <td>
             <div class="btn-toolbar">
                 <div class="btn-group">
