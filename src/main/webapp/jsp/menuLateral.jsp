@@ -20,6 +20,12 @@
         }
         menu += "<a href=\"Controller?class=usuario&method=login\">Login</a></li>";
     } else {
+        if (oContexto.getClase().equals("usuario") && oContexto.getMetodo().equals("list")) {
+            menu += "<li class=\"active\">";
+        } else {
+            menu += "<li>";
+        }
+        menu += "<a href=\"Controller?class=usuario&method=list\">Listar</a></li>";
         if (oContexto.getClase().equals("usuario") && oContexto.getMetodo().equals("logout")) {
             menu += "<li class=\"active\">";
         } else {
