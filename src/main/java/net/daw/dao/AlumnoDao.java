@@ -11,7 +11,6 @@ import net.daw.bean.AlumnoBean;
 import net.daw.bean.UsuarioBean;
 import net.daw.data.Mysql;
 import net.daw.helper.Enum;
-import net.daw.dao.UsuarioDao;
 import net.daw.helper.FilterBean;
 
 /**
@@ -30,11 +29,11 @@ public class AlumnoDao {
         enumTipoConexion = tipoConexion;
     }
 
-    public int getPages(int intRegsPerPag, ArrayList<FilterBean> hmFilter, HashMap<String, String> hmOrder) throws Exception {
+    public int getPages(int intRegsPerPag, ArrayList<FilterBean> alFilter, HashMap<String, String> hmOrder) throws Exception {
         int pages;
         try {
             oMysql.conexion(enumTipoConexion);
-            pages = oMysql.getPages("alumno", intRegsPerPag, hmFilter, hmOrder);
+            pages = oMysql.getPages("alumno", intRegsPerPag, alFilter, hmOrder);
             oMysql.desconexion();
             return pages;
         } catch (Exception e) {
@@ -44,12 +43,12 @@ public class AlumnoDao {
         }
     }
 
-    public ArrayList<AlumnoBean> getPage(int intRegsPerPag, int intPage, ArrayList<FilterBean>  hmFilter, HashMap<String, String> hmOrder) throws Exception {
+    public ArrayList<AlumnoBean> getPage(int intRegsPerPag, int intPage, ArrayList<FilterBean> alFilter, HashMap<String, String> hmOrder) throws Exception {
         ArrayList<Integer> arrId;
         ArrayList<AlumnoBean> arrAlumno = new ArrayList<>();
         try {
             oMysql.conexion(enumTipoConexion);
-            arrId = oMysql.getPage("alumno", intRegsPerPag, intPage, hmFilter, hmOrder);
+            arrId = oMysql.getPage("alumno", intRegsPerPag, intPage, alFilter, hmOrder);
             Iterator<Integer> iterador = arrId.listIterator();
             while (iterador.hasNext()) {
                 AlumnoBean oAlumnoBean = new AlumnoBean(iterador.next());
@@ -72,39 +71,42 @@ public class AlumnoDao {
     }
 
     public AlumnoBean get(AlumnoBean oAlumnoBean) throws Exception {
-
-        
-
-        try {
-            oMysql.conexion(enumTipoConexion);
-            oAlumnoBean.setDni(oMysql.getOne("alumno", "dni", oAlumnoBean.getId()));
-            oAlumnoBean.setNumexpediente(oMysql.getOne("alumno", "numexpediente", oAlumnoBean.getId()));
-            oAlumnoBean.setNombre(oMysql.getOne("alumno", "nombre", oAlumnoBean.getId()));
-            oAlumnoBean.setApe1(oMysql.getOne("alumno", "ape1", oAlumnoBean.getId()));
-            oAlumnoBean.setApe2(oMysql.getOne("alumno", "ape2", oAlumnoBean.getId()));
-            oAlumnoBean.setSexo(oMysql.getOne("alumno", "sexo", oAlumnoBean.getId()));
-            oAlumnoBean.setDomicilio(oMysql.getOne("alumno", "domicilio", oAlumnoBean.getId()));
-            oAlumnoBean.setCodpostal(oMysql.getOne("alumno", "codpostal", oAlumnoBean.getId()));
-            oAlumnoBean.setPoblacion(oMysql.getOne("alumno", "poblacion", oAlumnoBean.getId()));
-            oAlumnoBean.setProvincia(oMysql.getOne("alumno", "provincia", oAlumnoBean.getId()));
-            oAlumnoBean.setTelefono(oMysql.getOne("alumno", "telefono", oAlumnoBean.getId()));
-            oAlumnoBean.setEmail(oMysql.getOne("alumno", "email", oAlumnoBean.getId()));
-            oAlumnoBean.setValidado(oMysql.getOne("alumno", "validado", oAlumnoBean.getId()));
-            
-            UsuarioBean oUsuarioBean = new UsuarioBean();
-            oUsuarioBean.setId(oAlumnoBean.getId_usuario());
-            
-            //UsuarioDao oUsuarioDao = new UsuarioDao();
-            //oUsuarioBean = oUsuarioDao.get(oUsuarioBean);
-            
-            oAlumnoBean.setLogin(oUsuarioBean.getLogin());
-            oAlumnoBean.setPassword(oUsuarioBean.getPassword());
-            
-            oMysql.desconexion();
-        } catch (Exception e) {
-            throw new Exception("AlumnoDao.getAlumno: Error: " + e.getMessage());
-        } finally {
-            oMysql.desconexion();
+        if (oAlumnoBean.getId() > 0) {
+            try {
+                oMysql.conexion(enumTipoConexion);
+                if (!oMysql.existsOne("alumno", oAlumnoBean.getId())) {
+                    oAlumnoBean.setId(0);
+                } else {
+                    oAlumnoBean.setId_usuario(Integer.parseInt(oMysql.getOne("alumno", "id_usuario", oAlumnoBean.getId())));
+                    oAlumnoBean.setDni(oMysql.getOne("alumno", "dni", oAlumnoBean.getId()));
+                    oAlumnoBean.setNumexpediente(oMysql.getOne("alumno", "numexpediente", oAlumnoBean.getId()));
+                    oAlumnoBean.setNombre(oMysql.getOne("alumno", "nombre", oAlumnoBean.getId()));
+                    oAlumnoBean.setApe1(oMysql.getOne("alumno", "ape1", oAlumnoBean.getId()));
+                    oAlumnoBean.setApe2(oMysql.getOne("alumno", "ape2", oAlumnoBean.getId()));
+                    oAlumnoBean.setSexo(oMysql.getOne("alumno", "sexo", oAlumnoBean.getId()));
+                    oAlumnoBean.setDomicilio(oMysql.getOne("alumno", "domicilio", oAlumnoBean.getId()));
+                    oAlumnoBean.setCodpostal(oMysql.getOne("alumno", "codpostal", oAlumnoBean.getId()));
+                    oAlumnoBean.setPoblacion(oMysql.getOne("alumno", "poblacion", oAlumnoBean.getId()));
+                    oAlumnoBean.setProvincia(oMysql.getOne("alumno", "provincia", oAlumnoBean.getId()));
+                    oAlumnoBean.setTelefono(oMysql.getOne("alumno", "telefono", oAlumnoBean.getId()));
+                    oAlumnoBean.setEmail(oMysql.getOne("alumno", "email", oAlumnoBean.getId()));
+                    oAlumnoBean.setValidado(oMysql.getOne("alumno", "validado", oAlumnoBean.getId()));
+                    String strId_usuario = oMysql.getOne("alumno", "id_usuario", oAlumnoBean.getId());
+                    if (strId_usuario != null) {
+                        UsuarioBean oUsuarioBean = new UsuarioBean();
+                        oAlumnoBean.setUsuario(oUsuarioBean);
+                        oAlumnoBean.getUsuario().setId(Integer.parseInt(strId_usuario));
+                        UsuarioDao oUsuarioDao = new UsuarioDao(enumTipoConexion);
+                        oAlumnoBean.setUsuario(oUsuarioDao.get(oAlumnoBean.getUsuario()));
+                    }
+                }
+            } catch (Exception e) {
+                throw new Exception("AlumnoDao.getAlumno: Error: " + e.getMessage());
+            } finally {
+                oMysql.desconexion();
+            }
+        } else {
+            oAlumnoBean.setId(0);
         }
         return oAlumnoBean;
     }
@@ -114,17 +116,10 @@ public class AlumnoDao {
             oMysql.conexion(enumTipoConexion);
             oMysql.initTrans();
 
-            UsuarioBean oUsuarioBean = new UsuarioBean();
-            oUsuarioBean.getId();
-
-            if (oUsuarioBean.getId() == 0) {
-                oUsuarioBean.setId(oMysql.insertOne("usuario"));
-            }
-
             if (oAlumnoBean.getId() == 0) {
                 oAlumnoBean.setId(oMysql.insertOne("alumno"));
             }
-            oMysql.updateOne(oUsuarioBean.getId(), "usuario", "id", Integer.toString(oUsuarioBean.getId()));
+            oMysql.updateOne(oAlumnoBean.getId(), "alumno", "id_usuario", Integer.toString(oAlumnoBean.getId_usuario()));
             oMysql.updateOne(oAlumnoBean.getId(), "alumno", "dni", oAlumnoBean.getDni());
             oMysql.updateOne(oAlumnoBean.getId(), "alumno", "numexpediente", oAlumnoBean.getNumexpediente());
             oMysql.updateOne(oAlumnoBean.getId(), "alumno", "nombre", oAlumnoBean.getNombre());
@@ -138,13 +133,17 @@ public class AlumnoDao {
             oMysql.updateOne(oAlumnoBean.getId(), "alumno", "telefono", oAlumnoBean.getTelefono());
             oMysql.updateOne(oAlumnoBean.getId(), "alumno", "email", oAlumnoBean.getEmail());
             oMysql.updateOne(oAlumnoBean.getId(), "alumno", "validado", oAlumnoBean.getValidado());
-            oMysql.updateOne(oUsuarioBean.getId(), "usuario", "login", oUsuarioBean.getLogin());
-            oMysql.updateOne(oUsuarioBean.getId(), "usuario", "password", oUsuarioBean.getPassword());
-
+            if (oAlumnoBean.getId_usuario() > 0) {
+                oMysql.updateOne(oAlumnoBean.getId_usuario(), "usuario", "password", oAlumnoBean.getPassword());
+                oMysql.updateOne(oAlumnoBean.getId_usuario(), "usuario", "login", oAlumnoBean.getLogin());
+            } else {
+                oMysql.setNull(oAlumnoBean.getId_usuario(), "usuario", "password");
+                oMysql.setNull(oAlumnoBean.getId_usuario(), "usuario", "login");
+            }
             oMysql.commitTrans();
         } catch (Exception e) {
             oMysql.rollbackTrans();
-            throw new Exception("AlumnoDao.setCliente: Error: " + e.getMessage());
+            throw new Exception("AlumnoDao.setAlumno: Error: " + e.getMessage());
         } finally {
             oMysql.desconexion();
         }

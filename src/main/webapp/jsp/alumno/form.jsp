@@ -1,5 +1,6 @@
 <%@page import="net.daw.helper.Contexto"%>
 <%@page import="net.daw.bean.AlumnoBean"%>
+<%@page import="net.daw.bean.UsuarioBean"%>
 <% Contexto oContexto = (Contexto) request.getAttribute("contexto");
     String strTitulo = "";
     String strControlEnabled = "";
@@ -38,6 +39,8 @@
         telefono = oAlumnoBean.getTelefono();
         email = oAlumnoBean.getEmail();
         validado = oAlumnoBean.getValidado();
+        login = oAlumnoBean.getUsuario().getLogin();
+        password = oAlumnoBean.getUsuario().getPassword();
     }
     if (oContexto.getMetodo().equals("view")) {
         strTitulo = "Vista";
@@ -169,7 +172,7 @@
                 <input <%=strControlEnabled%> id="login" name="login" type="text" size="30" maxlength="50" value="<%=login%>" /><br />
             </div>
         </div>
-            <div class="control-group">
+        <div class="control-group">
             <label class="control-label" for="password">Contraseña: </label> 
             <div class="controls">
                 <input <%=strControlEnabled%> id="password" name="password" type="text" size="30" maxlength="50" value="<%=password%>" /><br />

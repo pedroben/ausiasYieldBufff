@@ -32,6 +32,7 @@ public class AlumnoBean {
     private String validado = "";
     private String login = "";
     private String password = "";
+    private UsuarioBean usuario = null;
 
     /*
      * Constructor vacio
@@ -282,5 +283,19 @@ public class AlumnoBean {
      */
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    /**
+     * @return the usuario
+     */
+    public UsuarioBean getUsuario() {
+        return usuario;
+    }
+
+    /**
+     * @param usuario the usuario to set
+     */
+    public void setUsuario(UsuarioBean usuario) {
+        this.usuario = usuario;
     }
 }
