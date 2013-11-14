@@ -30,10 +30,10 @@ public class UsuarioList1 implements Operation {
 
             ArrayList<UsuarioBean> listado = oUsuarioDao.getPage(oContexto.getNrpp(), oContexto.getPage(), oContexto.getAlFilter(), oContexto.getHmOrder());
             String strUrl = "<a href=\"Controller?" + oContexto.getSerializedParamsExceptPage() + "&page=";
-            ArrayList<String> vecindad = Pagination.getButtonPad(strUrl, oContexto.getPage(), intPages, 2);
+            ArrayList<String> botonera = Pagination.getButtonPad(strUrl, oContexto.getPage(), intPages, 2);
             ArrayList<Object> a = new ArrayList<>();
             a.add(listado);
-            a.add(vecindad);
+            a.add(botonera);
             a.add(intRegisters);
             return a;
         } catch (Exception e) {
