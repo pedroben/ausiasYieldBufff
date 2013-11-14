@@ -81,13 +81,6 @@ public class UsuarioDao {
         }
     }
 
-    public ArrayList<String> getNeighborhood(String strLink, int intPageNumber, int intTotalPages, int intNeighborhood) throws Exception {
-        oMysql.conexion(enumTipoConexion);
-        ArrayList<String> n = oMysql.getNeighborhood(strLink, intPageNumber, intTotalPages, intNeighborhood);
-        oMysql.desconexion();
-        return n;
-    }
-
     public UsuarioBean get(UsuarioBean oUsuarioBean) throws Exception {
         if (oUsuarioBean.getId() > 0) {
             try {

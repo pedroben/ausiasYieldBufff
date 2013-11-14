@@ -76,26 +76,19 @@ public class EntradaDao {
         }
     }
 
-    public ArrayList<String> getNeighborhood(String strLink, int intPageNumber, int intTotalPages, int intNeighborhood) throws Exception {
-        oMysql.conexion(enumTipoConexion);
-        ArrayList<String> n = oMysql.getNeighborhood(strLink, intPageNumber, intTotalPages, intNeighborhood);
-        oMysql.desconexion();
-        return n;
-    }
-
     public EntradaBean get(EntradaBean oEntradaBean) throws Exception {
         try {
             oMysql.conexion(enumTipoConexion);
 
             HiloBean oHiloBean = new HiloBean();
             UsuarioBean oUsuarioBean = new UsuarioBean();
-            
+
             oEntradaBean.setTitulo(oMysql.getOne("entrada", "titulo", oEntradaBean.getId()));
             oEntradaBean.setContenido(oMysql.getOne("entrada", "contenido", oEntradaBean.getId()));
             oHiloBean.setId(Integer.parseInt(oMysql.getOne("entrada", "id_hilo", oEntradaBean.getId())));
             oUsuarioBean.setId(Integer.parseInt(oMysql.getOne("entrada", "id_usuario", oEntradaBean.getId())));
             String strFecha = oMysql.getOne("entrada", "fecha", oEntradaBean.getId());
-            
+
             if (strFecha != null) {
                 Date dFecha = new SimpleDateFormat("yyyy-MM-dd").parse(strFecha);
                 oEntradaBean.setFecha(dFecha);

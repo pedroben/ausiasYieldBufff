@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import net.daw.bean.UsuarioBean;
 import net.daw.dao.UsuarioDao;
 import net.daw.helper.Contexto;
+import net.daw.helper.Pagination;
 
 public class UsuarioList1 implements Operation {
 
@@ -29,7 +30,7 @@ public class UsuarioList1 implements Operation {
 
             ArrayList<UsuarioBean> listado = oUsuarioDao.getPage(oContexto.getNrpp(), oContexto.getPage(), oContexto.getAlFilter(), oContexto.getHmOrder());
             String strUrl = "<a href=\"Controller?" + oContexto.getSerializedParamsExceptPage() + "&page=";
-            ArrayList<String> vecindad = oUsuarioDao.getNeighborhood(strUrl, oContexto.getPage(), intPages, 2);
+            ArrayList<String> vecindad = Pagination.getButtonPad(strUrl, oContexto.getPage(), intPages, 2);
             ArrayList<Object> a = new ArrayList<>();
             a.add(listado);
             a.add(vecindad);
