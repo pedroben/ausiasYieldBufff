@@ -41,7 +41,7 @@
     } else {
         menu += "<li>";
     }
-    menu += "<a href=\"Controller?class=alumno&method=list\">Crear</a></li>";
+    menu += "<a href=\"Controller?class=alumno&method=new\">Crear</a></li>";
     if (oContexto.getClase().equals("alumno") && oContexto.getMetodo().equals("list")) {
         menu += "<li class=\"active\">";
     } else {
@@ -56,7 +56,7 @@
     } else {
         menu += "<li>";
     }
-    menu += "<a href=\"Controller?class=profesor&method=list\">Crear</a></li>";
+    menu += "<a href=\"Controller?class=profesor&method=new\">Crear</a></li>";
     if (oContexto.getClase().equals("profesor") && oContexto.getMetodo().equals("list")) {
         menu += "<li class=\"active\">";
     } else {
@@ -71,7 +71,7 @@
     } else {
         menu += "<li>";
     }
-    menu += "<a href=\"Controller?class=empresa&method=list\">Crear</a></li>";
+    menu += "<a href=\"Controller?class=empresa&method=new\">Crear</a></li>";
     if (oContexto.getClase().equals("empresa") && oContexto.getMetodo().equals("list")) {
         menu += "<li class=\"active\">";
     } else {
@@ -101,7 +101,7 @@
     } else {
         menu += "<li>";
     }
-    menu += "<a href=\"Controller?class=hilo&method=list\">Crear</a></li>";
+    menu += "<a href=\"Controller?class=hilo&method=new\">Crear</a></li>";
     if (oContexto.getClase().equals("hilo") && oContexto.getMetodo().equals("list")) {
         menu += "<li class=\"active\">";
     } else {
@@ -116,7 +116,7 @@
     } else {
         menu += "<li>";
     }
-    menu += "<a href=\"Controller?class=backlog&method=list\">Crear</a></li>";
+    menu += "<a href=\"Controller?class=backlog&method=new\">Crear</a></li>";
     if (oContexto.getClase().equals("backlog") && oContexto.getMetodo().equals("list")) {
         menu += "<li class=\"active\">";
     } else {
@@ -131,7 +131,7 @@
     } else {
         menu += "<li>";
     }
-    menu += "<a href=\"Controller?class=actividadoffline&method=list\">Crear</a></li>";
+    menu += "<a href=\"Controller?class=actividadoffline&method=new\">Crear</a></li>";
     if (oContexto.getClase().equals("actividadoffline") && oContexto.getMetodo().equals("list")) {
         menu += "<li class=\"active\">";
     } else {
