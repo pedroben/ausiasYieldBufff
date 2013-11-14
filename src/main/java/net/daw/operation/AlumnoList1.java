@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import net.daw.bean.AlumnoBean;
 import net.daw.dao.AlumnoDao;
 import net.daw.helper.Contexto;
+import net.daw.helper.Pagination;
 
 /**
  *
@@ -27,10 +28,11 @@ public class AlumnoList1 implements Operation {
                 oContexto.setPage(intPages);
             }
             ArrayList<AlumnoBean> listado = (ArrayList<AlumnoBean>) oAlumnoDao.getPage(oContexto.getNrpp(), oContexto.getPage(), oContexto.getAlFilter(), oContexto.getHmOrder());
-            ArrayList<String> vecindad = (ArrayList<String>) oAlumnoDao.getNeighborhood("<a href=\"Controller?class=alumno&method=list&rpp=" + oContexto.getNrpp() + "&page=", oContexto.getPage(), intPages, 2);
+            String strUrl = "<a href=\"Controller?" + oContexto.getSerializedParamsExceptPage() + "&page="; 
+            ArrayList<String> botonera = Pagination.getButtonPad(strUrl, oContexto.getPage(), intPages, 2);
             ArrayList<Object> a = new ArrayList<>();
             a.add(listado);
-            a.add(vecindad);            
+            a.add(botonera);            
             return a;
         } catch (Exception e) {
             throw new ServletException("AlumnoList1: View Error: " + e.getMessage());
