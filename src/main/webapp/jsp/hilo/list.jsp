@@ -137,7 +137,8 @@
             <a href="Controller?<%=oContexto.getSerializedParamsExceptOrder()%>&order=fecha&ordervalue=asc"><i class="icon-arrow-up"></i></a>
             <a href="Controller?<%=oContexto.getSerializedParamsExceptOrder()%>&order=fecha&ordervalue=desc"><i class="icon-arrow-down"></i></a>        
         </th>
-        <th colspan="2">Operaciones</th>
+        <th>Relaciones</th>
+        <th>Operaciones</th>
     </tr>
     <%
         while (oIterador.hasNext()) {
@@ -146,10 +147,18 @@
     <tr>
         <td><%=oHiloBean.getId()%></td>
         <td><%=oHiloBean.getNombre()%></td>
+        
         <%
             SimpleDateFormat formatoFecha = new SimpleDateFormat("dd-MM-YYYY");
         %>
         <td><%=formatoFecha.format(oHiloBean.getFecha())%></td>
+        <td>
+            <div class="btn-toolbar">
+                <div class="btn-group">                    
+                    <a class="btn btn-mini" href="Controller?class=entrada&method=list&filter=id_hilo&filteroperator=equals&filtervalue=<%=oHiloBean.getId()%>">Entradas</a>
+                </div>
+            </div>
+        </td>
         <td>
             <div class="btn-toolbar">
                 <div class="btn-group">
