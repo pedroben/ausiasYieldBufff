@@ -47,7 +47,7 @@
             }
         %>
         <%
-           /* Integer registers = (Integer) alObjetoParametro.get(2);
+            /*Integer registers = (Integer) alObjetoParametro.get(2);
             out.print("Mostrando " + oContexto.getNrpp().toString() + " registros de un total de " + registers.toString());*/
         %>                
         <%
